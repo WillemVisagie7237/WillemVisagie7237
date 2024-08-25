@@ -3,7 +3,7 @@
 <!--END_SECTION:languages-->
 
 ## Languages I Use
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark&private=true&token=YOUR_PERSONAL_ACCESS_TOKEN)
 
 <!--
 **WillemVisagie7237/WillemVisagie7237** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
