@@ -1,5 +1,5 @@
 ## Languages I Use
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&layout=compact)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark)
 
 
 <!--
