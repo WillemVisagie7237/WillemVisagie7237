@@ -1,35 +1,31 @@
 name: Update README
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # Runs every hour
-  workflow_dispatch:  # Allows manual triggering
+  push:
+    branches:
+      - main
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
 
-      - name: Generate Stats and Update README
-        run: |
-          # Generate the SVG file
-          curl -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
-          "https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark&count_private=true" > ./langs-card.svg
-          
-          # Display the contents of the SVG file for debugging
-          echo "Generated SVG:"
-          cat ./langs-card.svg
-          
-          # Use sed to replace the content between the placeholders
-          sed -i '/<!--START_SECTION:languages-->/, /<!--END_SECTION:languages-->/d' README.md
-          sed -i '/<!--END_SECTION:languages-->/i <!--START_SECTION:languages-->\n![Top Langs](./langs-card.svg)\n<!--END_SECTION:languages-->' README.md
-          
-          # Display the contents of README.md for debugging
-          echo "Updated README.md:"
-          cat README.md
-          
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Update README with GitHub stats
+      run: |
+        # Replace the placeholder in the README with your PAT
+        sed -i "s/YOUR_PERSONAL_ACCESS_TOKEN/${{ secrets.GH_PAT }}/g" README.md
+      
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add README.md
+        git commit -m "Updated GitHub stats with PAT"
+        git push
+
           # Commit and push the changes
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
