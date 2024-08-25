@@ -12,17 +12,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Generate Stats and Update README
         run: |
+          # Generate the SVG file
           curl -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
           "https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark&count_private=true" > ./langs-card.svg
-          sed -i '/<!--START_SECTION:languages-->/,/<!--END_SECTION:languages-->/c\<!--START_SECTION:languages-->\n![Top Langs](./langs-card.svg)\n<!--END_SECTION:languages-->' README.md
+          
+          # Display the contents of the SVG file for debugging
+          echo "Generated SVG:"
+          cat ./langs-card.svg
+          
+          # Use sed to replace the content between the placeholders
+          sed -i '/<!--START_SECTION:languages-->/, /<!--END_SECTION:languages-->/d' README.md
+          sed -i '/<!--END_SECTION:languages-->/i <!--START_SECTION:languages-->\n![Top Langs](./langs-card.svg)\n<!--END_SECTION:languages-->' README.md
+          
+          # Display the contents of README.md for debugging
+          echo "Updated README.md:"
+          cat README.md
+          
+          # Commit and push the changes
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md langs-card.svg
           git commit -m "Updated language stats" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/WillemVisagie7237/WillemVisagie7237.git || echo "Push failed"
-
