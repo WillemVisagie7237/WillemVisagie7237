@@ -1,6 +1,4 @@
-<!--START_SECTION:languages-->
-
-<!--END_SECTION:languages-->
+![Willem's GitHub stats](https://github-readme-stats.vercel.app/api?username=WillemVisagie7237&show_icons=true&theme=transparent)
 
 ## Languages I Use
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WillemVisagie7237&theme=dark&private=true&token=YOUR_PERSONAL_ACCESS_TOKEN)
